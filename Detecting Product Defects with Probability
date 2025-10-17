@@ -1,0 +1,59 @@
+import scipy.stats as stats
+import numpy as np
+import math
+from scipy.stats import poisson
+
+### Task Group 1 ###
+## Task 1: 
+lam = 7
+## Task 2:
+p1 = poisson.pmf(lam, lam)
+# Methode 2: Manuell berechnet
+p2 = math.exp(-lam) * lam**lam / math.factorial(lam)
+print("Probability of exactly lam defects (scipy):", p1)
+print("Probability of exactly lam defects (manual):", p2)
+## Task 3:
+prob_4 = stats.poisson.pmf(4, 7)
+print("Probability of exactly lam defects (scipy):", prob_4)
+## Task 4:
+prob_9 = stats.poisson.pmf(9, 7)
+print("Probability of exactly lam defects (scipy):", prob_9)
+
+### Task Group 2 ###
+## Task 5:
+year_defects = stats.poisson.rvs(7, size = 365)
+## Task 6:
+print(year_defects)
+print(year_defects[:20])
+## Task 7:
+expected = lam * 365
+print(expected)
+yearly = sum(year_defects)
+print(yearly)
+## Task 8:
+average = sum(year_defects)/365
+print(average)
+## Task 9:
+print(max(year_defects))
+## Task 10:
+prob_16 = stats.poisson.pmf(16, 7)
+print("Probability of exactly lam defects (scipy):", prob_16)
+### Extra Bonus ###
+# Task 12
+from scipy import stats
+lam = 7
+percentile = 0.9
+# Berechnung des 90. Perzentils
+cutoff = stats.poisson.ppf(percentile, lam)
+print("90th percentile cutoff:", cutoff)
+
+# Task 13
+# Anzahl der Tage mit mindestens so vielen Defekten wie im 90. Perzentil
+num_high_defect_days = sum(year_defects >= percentile)
+
+# Anteil dieser Tage
+proportion = num_high_defect_days / len(year_defects)
+
+print("Tage mit >= 90th-Perzentil-Defekten:", num_high_defect_days)
+print("Proportion:", proportion)
+
